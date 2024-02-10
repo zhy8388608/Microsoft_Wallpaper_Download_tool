@@ -21,21 +21,21 @@ def getWallpaperUrlList():
 		if response.status_code != 200:
 			print('Error: Unable to connect to the server.')
 			return result
-		result += getUrls(json.loads(response.text))
+		result += json.loads(response.text)['images']
 	return result
 
-def download(urls, number, size='1920x1080'):
+def download(images, number, size='1920x1080'):
 	print('Image resolution: %s' % (size))
-	number = min(number, len(urls))
+	number = min(number, len(images))
 	now = datetime.datetime.now()
 	for i in range(0,number):
 		dateText = (now + datetime.timedelta(days = -i)).strftime('%Y-%m-%d')
-		name = 'out/%s_%s.jpg' % (dateText, size)
+		name = 'out/%s_%s_%s.jpg' % (dateText, size, images[i]['copyright'].replace('/','#'))
 		print('Downloading image%d...' % (i), end = '')
 		if os.path.exists(name):
 			print('Skipped: The image file already exists.')
 			continue
-		url = urls[i]
+		url = 'https://bing.com' + images[i]['url']
 		url = url.replace('1920x1080', size)
 		response = requests.get(url)
 		if response.status_code != 200:
