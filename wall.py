@@ -8,7 +8,7 @@ import datetime
 output_folder = 'out'
 os.makedirs(output_folder, exist_ok=True)
 
-def getWallpaperImageList():	#Note: Wallpapers are different for different regions
+def getWallpaperImageList():	#Note: Wallpapers are different for different regions.
 	result = []
 	for i in (0,7):	#idx is the number of the first image and n is the number of response images. idx+n<14.
 		response = requests.get('https://bing.com/HPImageArchive.aspx?format=js&idx=%d&n=7' % (i))
