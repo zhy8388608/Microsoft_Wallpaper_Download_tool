@@ -16,7 +16,7 @@ def getUrls(mjson):
 
 def getWallpaperUrlList():
 	result = []
-	for i in (0,7):	#idx is the number of the first image and n is the number of response images. idx+n<=14.
+	for i in (0,7):	#idx is the number of the first image and n is the number of response images. idx+n<14.
 		response = requests.get('https://bing.com/HPImageArchive.aspx?format=js&idx=%d&n=7' % (i))
 		if response.status_code != 200:
 			print('Error: Unable to connect to the server.')
